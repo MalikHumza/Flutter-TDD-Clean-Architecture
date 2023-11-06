@@ -1,7 +1,6 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:unit_testing/data/models/weather_model.dart';
 import 'package:unit_testing/domain/entities/weather.dart';
@@ -33,5 +32,28 @@ void main() {
 
     //assert
     expect(result, equals(testWeatherModel));
+  });
+
+  test('should return a json map containing proper data', () async {
+    //act
+    final result = testWeatherModel.toJson();
+
+    //assert
+    final expectedJsonMap = {
+      'weather': [
+        {
+          'main': 'Clear',
+          'description': 'clear sky',
+          'icon': '01n',
+        }
+      ],
+      'main': {
+        'temp': 292.87,
+        'pressure': 1012,
+        'humidity': 70,
+      },
+      'name': 'New York',
+    };
+    expect(result, equals(expectedJsonMap));
   });
 }
